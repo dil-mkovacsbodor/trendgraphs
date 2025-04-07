@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 interface DashboardNameProps {
   onNext?: () => void;
@@ -16,7 +16,7 @@ const DashboardName: React.FC<DashboardNameProps> = ({ onNext, onBack }) => {
       setError('Please enter a dashboard name');
       return;
     }
-    
+
     if (onNext) {
       onNext();
     } else {
@@ -40,15 +40,15 @@ const DashboardName: React.FC<DashboardNameProps> = ({ onNext, onBack }) => {
       <div className="wizard-content">
         <div className="form-group">
           <label htmlFor="dashboardName">Dashboard Name</label>
-          <input 
-            type="text" 
-            id="dashboardName" 
+          <input
+            type="text"
+            id="dashboardName"
             value={dashboardName}
             onChange={(e) => {
               setDashboardName(e.target.value);
               setError('');
             }}
-            placeholder="Enter dashboard name" 
+            placeholder="Enter dashboard name"
           />
           {error && <div className="error-message">{error}</div>}
         </div>
@@ -65,4 +65,4 @@ const DashboardName: React.FC<DashboardNameProps> = ({ onNext, onBack }) => {
   );
 };
 
-export default DashboardName; 
+export default DashboardName;
