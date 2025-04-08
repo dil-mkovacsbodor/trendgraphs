@@ -76,6 +76,28 @@
   --sidebar-accent-foreground: oklch(0.35 0.005 285.823);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.723 0.219 149.579);
+
+  /* Primary Colors */
+  --color-primary-100: oklch(60.92% 0.19 29.23);  /* #EE312E */
+  --color-primary-200: oklch(52.34% 0.185 29.23);  /* #D3222A */
+  --color-primary-300: oklch(45.76% 0.155 29.23);  /* #AF292E */
+  --color-primary-400: oklch(38.19% 0.13 29.23);  /* #92191D */
+  --color-primary-500: oklch(30.62% 0.105 29.23);  /* #5F091D */
+
+  /* Neutral Colors */
+  --color-neutral-100: oklch(95.29% 0 0);  /* #F3F3F3 */
+  --color-neutral-200: oklch(85.88% 0 0);  /* #DADADA */
+  --color-neutral-300: oklch(66.47% 0.01 251.23);  /* #A0A2A5 */
+  --color-neutral-400: oklch(47.06% 0.01 251.23);  /* #6F7377 */
+  --color-neutral-500: oklch(27.65% 0.01 251.23);  /* #282E37 */
+
+  /* Secondary Colors */
+  --color-secondary-100: oklch(15.29% 0.06 286.32);  /* #150B48 */
+  --color-secondary-200: oklch(45.88% 0.04 251.23);  /* #536776 */
+  --color-secondary-300: oklch(35.29% 0.08 251.23);  /* #1A5280 */
+  --color-secondary-400: oklch(55.29% 0.12 251.23);  /* #247EE7 */
+  --color-secondary-500: oklch(65.29% 0.14 251.23);  /* #22A7DD */
+  --color-secondary-600: oklch(92.65% 0.02 251.23);  /* #E0EAEF */
 }
 
 .dark {
