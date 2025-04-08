@@ -1,4 +1,5 @@
 import type { QueryPayload } from '../schema/form.schema'
+import { queryPayloadSchema } from '../schema/form.schema'
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || 'https://61mbal589a.execute-api.us-west-2.amazonaws.com/prod/company-config'
@@ -6,6 +7,8 @@ const API_BASE_URL =
 export const apiService = {
   async submitQuery(payload: QueryPayload) {
     try {
+      queryPayloadSchema.parse(payload)
+
       const response = await fetch(`${API_BASE_URL}/query`, {
         method: 'POST',
         headers: {
