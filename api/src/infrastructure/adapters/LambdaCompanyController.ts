@@ -1,7 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { SearchCompaniesUseCase } from '../../application/useCases/SearchCompaniesUseCase';
 import { SearchCompanyByRegNumberUseCase } from '../../application/useCases/SearchCompanyByRegNumberUseCase';
-import { GetIndustriesUseCase } from '../../application/useCases/GetIndustriesUseCase';
 
 /**
  * Lambda adapter for the company controller
@@ -9,8 +8,7 @@ import { GetIndustriesUseCase } from '../../application/useCases/GetIndustriesUs
 export class LambdaCompanyController {
   constructor(
     private readonly searchCompaniesUseCase: SearchCompaniesUseCase,
-    private readonly searchCompanyByRegNumberUseCase: SearchCompanyByRegNumberUseCase,
-    private readonly getIndustriesUseCase: GetIndustriesUseCase
+    private readonly searchCompanyByRegNumberUseCase: SearchCompanyByRegNumberUseCase
   ) {}
 
   /**
@@ -85,55 +83,6 @@ export class LambdaCompanyController {
       return {
         statusCode: 500,
         body: JSON.stringify({ message: 'Failed to search company' }),
-      };
-    }
-  }
-
-  /**
-   * Get all industries
-   */
-  async getAllIndustries(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
-    try {
-      const industries = await this.getIndustriesUseCase.execute();
-      
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ industries }),
-      };
-    } catch (error) {
-      console.error('Error getting industries:', error);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ message: 'Failed to get industries' }),
-      };
-    }
-  }
-
-  /**
-   * Search industries by prefix
-   */
-  async searchIndustries(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
-    try {
-      const prefix = event.queryStringParameters?.prefix || '';
-      
-      if (prefix.length < 2) {
-        return {
-          statusCode: 400,
-          body: JSON.stringify({ message: 'Prefix must be at least 2 characters long' }),
-        };
-      }
-
-      const industries = await this.getIndustriesUseCase.executeSearch(prefix);
-      
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ industries }),
-      };
-    } catch (error) {
-      console.error('Error searching industries:', error);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ message: 'Failed to search industries' }),
       };
     }
   }
