@@ -23,12 +23,12 @@ const categoryIcons = {
 };
 
 const categoryColors = {
-  Political: 'bg-red-100 text-red-700',
-  Economic: 'bg-blue-100 text-blue-700',
-  Social: 'bg-purple-100 text-purple-700',
-  Technological: 'bg-cyan-100 text-cyan-700',
-  Legal: 'bg-amber-100 text-amber-700',
-  Environmental: 'bg-emerald-100 text-emerald-700',
+  Political: 'bg-gradient-to-r from-red-400 to-red-600 text-white',
+  Economic: 'bg-gradient-to-r from-blue-400 to-blue-600 text-white',
+  Social: 'bg-gradient-to-r from-purple-400 to-purple-600 text-white',
+  Technological: 'bg-gradient-to-r from-cyan-400 to-cyan-600 text-white',
+  Legal: 'bg-gradient-to-r from-amber-400 to-amber-600 text-white',
+  Environmental: 'bg-gradient-to-r from-emerald-400 to-emerald-600 text-white',
 };
 
 export function PestleChart({ data }: PestleChartProps) {
@@ -44,7 +44,7 @@ export function PestleChart({ data }: PestleChartProps) {
       {/* Overview Card */}
       <Card>
         <CardHeader>
-          <CardTitle>PESTLE Analysis Overview</CardTitle>
+          <CardTitle className="text-lg font-bold">PESTLE Analysis Overview</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -54,12 +54,12 @@ export function PestleChart({ data }: PestleChartProps) {
               return (
                 <div
                   key={category}
-                  className={`flex flex-col items-center p-4 rounded-lg ${colorClass}`}
+                  className={`flex flex-col items-center p-4 rounded-lg shadow-lg transform transition-transform hover:scale-105 ${colorClass}`}
                 >
                   <Icon className="w-8 h-8 mb-2" />
-                  <span className="font-semibold">{category}</span>
-                  <span className="text-sm">{count} items</span>
-                  <span className="text-sm">Avg. relevance: {(avgRelevance * 100).toFixed(1)}%</span>
+                  <span className="font-semibold text-white">{category}</span>
+                  <span className="text-sm text-white">{count} items</span>
+                  <span className="text-sm text-white">Avg. relevance: {(avgRelevance * 100).toFixed(1)}%</span>
                 </div>
               );
             })}
@@ -70,7 +70,7 @@ export function PestleChart({ data }: PestleChartProps) {
       {/* Detailed News List */}
       <Card>
         <CardHeader>
-          <CardTitle>Recent News Items</CardTitle>
+          <CardTitle className="text-lg font-bold">Recent News Items</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -79,20 +79,20 @@ export function PestleChart({ data }: PestleChartProps) {
               return items.map((item, index) => (
                 <div
                   key={`${category}-${index}`}
-                  className={`p-4 rounded-lg border ${colorClass.replace('text-', 'border-')}`}
+                  className={`p-4 rounded-lg border shadow-md transform transition-transform hover:scale-105 ${colorClass.replace('text-', 'border-')}`}
                 >
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold">{item.shortTitle}</h3>
-                    <span className="text-sm opacity-75">
+                    <h3 className="font-semibold text-white">{item.shortTitle}</h3>
+                    <span className="text-sm opacity-75 text-white">
                       {(item.relevance * 100).toFixed(1)}% relevant
                     </span>
                   </div>
-                  <p className="text-sm mb-2">{item.summary}</p>
+                  <p className="text-sm mb-2 text-white">{item.summary}</p>
                   <a
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm underline hover:no-underline"
+                    className="text-sm underline hover:no-underline text-white"
                   >
                     Read more
                   </a>
