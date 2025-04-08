@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom';
 import ConfigSettings from './ConfigSettings';
 import DashboardSelector from './DashboardSelector';
 import EmailSetup from './EmailSetup';
-import './Wizard.css';
 import {FormProvider, useForm} from "react-hook-form";
 import {toast} from "sonner";
 import { cn } from "@/lib/utils";
@@ -17,7 +16,7 @@ export interface FormData {
   dashboardType: string
   competitors: string[],
   partners: string[],
-  timeframe: string[]  //(UTC, tol/ig)
+  timeframe: string[]
 }
 
 const defaultFormData: FormData = {
@@ -51,17 +50,9 @@ const Wizard: React.FC = () => {
     })
   }
 
-  const handleDashboardNameNext = () => {
-    setCurrentStep(3);
-  };
-
-  const handleDashboardNameBack = () => {
-    setCurrentStep(1);
-  };
-
   const steps = [
     {
-      title: 'Configuration Settings',
+      title: 'Configuration',
       component: <ConfigSettings form={form} onNext={() => setCurrentStep(1)} />
     },
     {
@@ -77,7 +68,7 @@ const Wizard: React.FC = () => {
       component: <EmailSetup
           form={form}
           onBack={() => navigate('/dashboard-name')}
-          onFinish={() => navigate('/results')}
+          onFinish={() => {}}
       />
     }
   ];
@@ -85,23 +76,37 @@ const Wizard: React.FC = () => {
   return (
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="wizard-container bg-card border border-[oklch(0.9_0_0)] px-8">
-            <div className="wizard-progress border-b-2 border-[oklch(0.9_0_0)] pb-8 mx-auto">
+          <div className="max-w-3xl mx-auto my-8 p-8 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="flex justify-between relative w-full pb-8 border-b-2 border-gray-200">
               {steps.map((step, index) => (
                   <div
                       key={index}
                       className={cn(
-                        "progress-step",
+                        "flex-1 relative z-10 bg-white px-4 text-center",
                         index === currentStep && "active",
                         index < currentStep && "completed"
                       )}
                   >
-                    <div className="step-number">{index + 1}</div>
-                    <div className="step-title">{step.title}</div>
+                    <div className={cn(
+                      "w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 font-bold",
+                      index === currentStep && "bg-primary text-white",
+                      index < currentStep && "bg-primary/20 text-primary",
+                      index > currentStep && "bg-gray-200 text-gray-600"
+                    )}>
+                      {index + 1}
+                    </div>
+                    <div className={cn(
+                      "text-sm",
+                      index === currentStep && "text-primary font-bold",
+                      index < currentStep && "text-primary/80 font-bold",
+                      index > currentStep && "text-gray-600"
+                    )}>
+                      {step.title}
+                    </div>
                   </div>
               ))}
             </div>
-            <div className="wizard-content-container flex justify-center">
+            <div className="flex justify-center py-8">
               {steps[currentStep].component}
             </div>
           </div>
