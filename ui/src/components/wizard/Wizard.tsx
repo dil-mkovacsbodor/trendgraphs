@@ -6,6 +6,7 @@ import EmailSetup from './EmailSetup';
 import './Wizard.css';
 import {FormProvider, useForm} from "react-hook-form";
 import {toast} from "sonner";
+import { cn } from "@/lib/utils";
 
 export interface FormData {
   company: string
@@ -89,8 +90,11 @@ const Wizard: React.FC = () => {
               {steps.map((step, index) => (
                   <div
                       key={index}
-                      className={`progress-step ${index === currentStep ? 'active' : ''}
-                           ${index < currentStep ? 'completed' : ''}`}
+                      className={cn(
+                        "progress-step",
+                        index === currentStep && "active",
+                        index < currentStep && "completed"
+                      )}
                   >
                     <div className="step-number">{index + 1}</div>
                     <div className="step-title">{step.title}</div>
@@ -106,4 +110,4 @@ const Wizard: React.FC = () => {
   );
 };
 
-export default Wizard; 
+export default Wizard;
