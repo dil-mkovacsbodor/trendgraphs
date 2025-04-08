@@ -1,21 +1,21 @@
-import React from 'react';
-import {Navigate, Route, Routes} from 'react-router-dom';
-import './App.css';
-import Wizard from './components/wizard/Wizard';
-import DashboardName from './components/wizard/DashboardName';
-import {Toaster} from "sonner";
+import { Navigate, Route, Routes } from 'react-router-dom'
+import Wizard from './components/wizard/Wizard'
+import DashboardName from './components/wizard/DashboardName'
+import { Toaster } from 'sonner'
+import { ResultsPage } from './pages/results-page'
 
 function App() {
-    return (
-        <div className="app-container">
-            <Routes>
-                <Route path="/" element={<Wizard />} />
-                <Route path="/dashboard-name" element={<DashboardName onNext={() => {}} onBack={() => {}} />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-            <Toaster position="top-right"/>
-        </div>
-    );
+  return (
+    <div className="app-container">
+      <Routes>
+        <Route path="/" element={<Wizard />} />
+        <Route path="/dashboard-name" element={<DashboardName onNext={() => {}} onBack={() => {}} />} />
+        <Route path="/results" element={<ResultsPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <Toaster position="top-right" />
+    </div>
+  )
 }
 
-export default App;
+export default App
