@@ -27,7 +27,7 @@ const EmailSetup: React.FC<EmailSetupProps> = ({ form, onBack, onFinish }) => {
         You'll receive your dashboard when it's ready
       </p>
       <div className="px-12 py-6">
-      <Button className="w-full text-lg">Subscribe</Button>
+      <Button className="w-full text-lg" onClick={onFinish}>Subscribe</Button>
       </div>
     </div>
 
@@ -35,4 +35,4 @@ const EmailSetup: React.FC<EmailSetupProps> = ({ form, onBack, onFinish }) => {
   );
 };
 
-export default EmailSetup; 
+export default EmailSetup;

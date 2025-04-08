@@ -77,7 +77,7 @@ const Wizard: React.FC = () => {
       component: <EmailSetup
           form={form}
           onBack={() => navigate('/dashboard-name')}
-          onFinish={() => console.log('Wizard completed')}
+          onFinish={() => navigate('/results')}
       />
     }
   ];
