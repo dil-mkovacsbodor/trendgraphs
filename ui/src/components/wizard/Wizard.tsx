@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ConfigSettings from './ConfigSettings'
 import { DashboardSelector } from './DashboardSelector'
@@ -6,20 +6,9 @@ import EmailSetup from './EmailSetup'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { Stepper } from '@/components/ui/stepper'
+import type { FormValues } from '@/lib/types/form'
 
-export interface FormData {
-  company: string
-  region: string
-  focus: string
-  industry: string
-  marketInsight: string
-  dashboardType: string
-  competitors: string[]
-  partners: string[]
-  timeframe: string[]
-}
-
-const defaultFormData: FormData = {
+const defaultFormData: FormValues = {
   company: '',
   region: '',
   focus: '',
@@ -35,11 +24,11 @@ export const Wizard = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const navigate = useNavigate()
 
-  const form = useForm<FormData>({
+  const form = useForm<FormValues>({
     defaultValues: defaultFormData,
   })
 
-  function onSubmit(data: FormData) {
+  function onSubmit(data: FormValues) {
     console.log('Form data:', data)
     const toastId = toast('Success', {
       description: 'Your configuration has been saved',

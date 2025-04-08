@@ -1,10 +1,10 @@
-import { FormData } from '@/components/wizard/Wizard.tsx'
+import type { FormValues } from '@/lib/types/form'
 import { Building2, Laptop, Leaf, LineChart, Scale, UserCheck, Users, UserSearch } from 'lucide-react'
-import { useForm } from 'react-hook-form'
-import { Button } from '@/components/ui/button.tsx'
+import { Button } from '@/components/ui/button'
+import type { UseFormReturn } from 'react-hook-form'
 
 interface DashboardSelectorProps {
-  form: ReturnType<typeof useForm<FormData>>
+  form: UseFormReturn<FormValues>
   onNext: () => void
   onBack: () => void
 }

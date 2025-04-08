@@ -1,11 +1,11 @@
 import React from 'react';
 import {UseFormReturn} from "react-hook-form";
-import {FormData} from "@/components/wizard/Wizard.tsx";
+import {FormValues} from "@/components/wizard/Wizard.tsx";
 import {Card, CardContent} from "@/components/ui/card.tsx";
 import {Button} from "@/components/ui/button.tsx";
 
 interface EmailSetupProps {
-  form: UseFormReturn<FormData>;
+  form: UseFormReturn<FormValues>;
   onBack: () => void;
   onFinish: () => void;
 }
