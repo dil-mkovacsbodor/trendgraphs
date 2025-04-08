@@ -7,5 +7,8 @@ export interface FormValues {
   dashboardType: string
   competitors: string[]
   partners: string[]
-  timeframe: string[]
+  timeframe?: {
+    from: Date
+    to?: Date
+  }
 }

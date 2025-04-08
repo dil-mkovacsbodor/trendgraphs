@@ -19,7 +19,7 @@ const defaultFormData: FormValues = {
   dashboardType: '',
   competitors: [],
   partners: [],
-  timeframe: [],
+  timeframe: undefined,
 }
 
 const formSchema = z.object({
@@ -31,7 +31,18 @@ const formSchema = z.object({
   dashboardType: z.string().min(1),
   competitors: z.array(z.string()).min(1),
   partners: z.array(z.string()).min(1),
-  timeframe: z.array(z.string()).min(1),
+  timeframe: z.object({
+    from: z.date(),
+    to: z.date().optional(),
+  }).optional().refine((data) => {
+    if (data?.to) {
+      return data.to >= data.from
+    }
+    return true
+  }, {
+    message: "End date must be after start date",
+    path: ["to"],
+  }),
 })
 
 export const FormWizard = () => {

@@ -5,6 +5,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import type { UseFormReturn } from 'react-hook-form'
 import type { FormValues } from '@/lib/types/form'
+import { TagInput } from './tag-input'
+import { DateRangePicker } from './date-range-picker'
 
 interface ConfigSettingsProps {
   form: UseFormReturn<FormValues>
@@ -13,7 +15,7 @@ interface ConfigSettingsProps {
 
 export function ConfigSettings({ form, onNext }: ConfigSettingsProps) {
   const handleNext = () => {
-    form.trigger(['company', 'region', 'focus', 'industry', 'marketInsight']).then(isValid => {
+    form.trigger(['company', 'region', 'focus', 'industry', 'marketInsight', 'competitors', 'partners', 'timeframe']).then(isValid => {
       if (isValid) {
         onNext()
       }
@@ -22,8 +24,8 @@ export function ConfigSettings({ form, onNext }: ConfigSettingsProps) {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-6 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* LEFT COLUMN FIELDS */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Company and Region */}
         <div className="space-y-6">
           <FormField
             control={form.control}
@@ -63,6 +65,10 @@ export function ConfigSettings({ form, onNext }: ConfigSettingsProps) {
               </FormItem>
             )}
           />
+        </div>
+
+        {/* Focus and Industry */}
+        <div className="space-y-6">
           <FormField
             control={form.control}
             name="focus"
@@ -113,8 +119,29 @@ export function ConfigSettings({ form, onNext }: ConfigSettingsProps) {
           />
         </div>
 
-        {/* RIGHT COLUMN - Market Insight */}
+        {/* Competitors and Partners */}
         <div className="space-y-6">
+          <TagInput
+            form={form}
+            name="competitors"
+            label="Competitors"
+            placeholder="Enter competitor name and press Enter"
+          />
+          <TagInput
+            form={form}
+            name="partners"
+            label="Partners"
+            placeholder="Enter partner name and press Enter"
+          />
+        </div>
+
+        {/* Timeframe and Market Insight */}
+        <div className="space-y-6">
+          <DateRangePicker
+            form={form}
+            name="timeframe"
+            label="Timeframe"
+          />
           <FormField
             control={form.control}
             name="marketInsight"
