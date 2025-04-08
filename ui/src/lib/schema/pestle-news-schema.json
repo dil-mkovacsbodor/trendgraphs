@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "Political": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/NewsObject"
+            }
+        },
+        "Economic": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/NewsObject"
+            }
+        },
+        "Social": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/NewsObject"
+            }
+        },
+        "Technological": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/NewsObject"
+            }
+        },
+        "Legal": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/NewsObject"
+            }
+        },
+        "Environmental": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/NewsObject"
+            }
+        }
+    },
+    "definitions": {
+        "NewsObject": {
+            "type": "object",
+            "required": [
+                "link",
+                "title",
+                "shortTitle",
+                "summary",
+                "relevance"
+            ],
+            "properties": {
+                "link": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL to the full news article"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Full title of the news article"
+                },
+                "shortTitle": {
+                    "type": "string",
+                    "description": "Shortened version of the title"
+                },
+                "summary": {
+                    "type": "string",
+                    "description": "Brief summary of the news article"
+                },
+                "relevance": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Relevance score of the news article (0-1)"
+                }
+            }
+        }
+    }
+}
