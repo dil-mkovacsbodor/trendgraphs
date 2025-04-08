@@ -28,6 +28,7 @@ const defaultFormData: FormData = {
   dashboardType: "",
   competitors: [],
   partners: [],
+  timeframe: [],
 }
 
 const Wizard: React.FC = () => {
@@ -66,7 +67,7 @@ const Wizard: React.FC = () => {
       title: 'Dashboard Selection',
       component: <DashboardSelector
           form={form}
-          onNext={() => navigate('/dashboard-name')}
+          onNext={() => setCurrentStep(2)}
           onBack={() => setCurrentStep(0)}
       />
     },
@@ -74,7 +75,7 @@ const Wizard: React.FC = () => {
       title: 'Email Setup',
       component: <EmailSetup
           form={form}
-          onBack={() => setCurrentStep(2)}
+          onBack={() => navigate('/dashboard-name')}
           onFinish={() => console.log('Wizard completed')}
       />
     }

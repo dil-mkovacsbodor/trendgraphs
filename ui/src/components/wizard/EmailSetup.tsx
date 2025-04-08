@@ -1,6 +1,8 @@
 import React from 'react';
 import {UseFormReturn} from "react-hook-form";
 import {FormData} from "@/components/wizard/Wizard.tsx";
+import {Card, CardContent} from "@/components/ui/card.tsx";
+import {Button} from "@/components/ui/button.tsx";
 
 interface EmailSetupProps {
   form: UseFormReturn<FormData>;
@@ -8,39 +10,28 @@ interface EmailSetupProps {
   onFinish: () => void;
 }
 
-const EmailSetup: React.FC<EmailSetupProps> = ({ onBack, onFinish }) => {
+const EmailSetup: React.FC<EmailSetupProps> = ({ form, onBack, onFinish }) => {
   return (
     <div className="wizard-page">
-      <h2>Email Setup</h2>
-      <div className="wizard-content">
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
-          <input type="email" id="email" placeholder="Enter your email address" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="notifications">Notification Preferences</label>
-          <div className="checkbox-group">
-            <label>
-              <input type="checkbox" id="daily" /> Daily Reports
-            </label>
-            <label>
-              <input type="checkbox" id="weekly" /> Weekly Summaries
-            </label>
-            <label>
-              <input type="checkbox" id="alerts" /> Alert Notifications
-            </label>
-          </div>
-        </div>
-        <div className="wizard-navigation">
-          <button onClick={onBack} className="back-button">
-            Back
-          </button>
-          <button onClick={onFinish} className="finish-button">
-            Finish
-          </button>
-        </div>
+      <h1 className="text-4xl font-bold mb-6 text-center py-6">Thank you!</h1>
+
+      <Card className="w-full max-w-md mb-6">
+        <CardContent>
+          <h2 className="text-xl font-semibold mb-2">Final Report</h2>
+          <p className="text-muted-foreground">
+            Your report is being generated. You’ll be notified when it’s ready to view.
+          </p>
+        </CardContent>
+      </Card>
+      <p className="mb-4 text-sm text-muted-foreground py-6">
+        You'll receive your dashboard when it's ready
+      </p>
+      <div className="px-12 py-6">
+      <Button className="w-full text-lg">Subscribe</Button>
       </div>
     </div>
+
+
   );
 };
 

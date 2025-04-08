@@ -2,6 +2,7 @@ import React from 'react';
 import {FormData} from "@/components/wizard/Wizard.tsx";
 import {Building2, Laptop, Leaf, LineChart, Scale, UserCheck, Users, UserSearch} from "lucide-react";
 import {useForm} from "react-hook-form";
+import {Button} from "@/components/ui/button.tsx";
 
 interface DashboardSelectorProps {
   form: ReturnType<typeof useForm<FormData>>;
@@ -14,6 +15,7 @@ const DashboardSelector: React.FC<DashboardSelectorProps> = ({ form, onNext, onB
 
     const handleCardClick = (dashboardType: string) => {
         form.setValue("dashboardType", dashboardType);
+        onNext()
     };
 
     const pestleCategories = [
@@ -74,7 +76,7 @@ const DashboardSelector: React.FC<DashboardSelectorProps> = ({ form, onNext, onB
 
 
     return (
-        <div className="mx-auto flex flex-col pb-12">
+        <div className="flex flex-col">
             <div>
                 <h1 className="text-2xl font-semibold mb-6 text-center tracking-wider">Select dashboard type</h1>
             </div>
@@ -89,7 +91,7 @@ const DashboardSelector: React.FC<DashboardSelectorProps> = ({ form, onNext, onB
                             key={category.name}
                         >
                             <div className="flex flex-col items-center">
-                                <div className={`w-24 h-24 rounded-lg ${category.bgColor} flex items-center justify-center m-2`}>
+                                <div className={`w-20 h-20 rounded-lg ${category.bgColor} flex items-center justify-center m-2`}>
                                     <category.icon size={40} className="text-gray-700" />
                                 </div>
                                 <span className="font-bold text-gray-700">{category.name}</span>
@@ -109,7 +111,7 @@ const DashboardSelector: React.FC<DashboardSelectorProps> = ({ form, onNext, onB
                                 key={category.name}
                             >
                                 <div className="flex flex-col items-center">
-                                    <div className={`w-24 h-24 rounded-lg ${category.bgColor} flex items-center justify-center m-2`}>
+                                    <div className={`w-20 h-20 rounded-lg ${category.bgColor} flex items-center justify-center m-2`}>
                                         <category.icon size={40} className="text-gray-700" />
                                     </div>
                                     <span className="font-bold text-gray-700">{category.name}</span>
@@ -119,7 +121,14 @@ const DashboardSelector: React.FC<DashboardSelectorProps> = ({ form, onNext, onB
                     </div>
                 </div>
             </div>
-            </div></div>
+            </div>
+            <div className="flex justify-between pt-4">
+
+                <Button variant="secondary" onClick={onBack}>Back</Button>
+
+                <Button type="button" onClick={onNext}>Next</Button>
+            </div>
+        </div>
   );
 };
 
