@@ -1,4 +1,3 @@
-
 export type RiskManagerDatabaseEnvironment = {
   stackName: string;
   securityGroupId:string;
@@ -21,6 +20,8 @@ export type ApplicationEnvironmentEnv = {
 
 export type ApplicationEnvironment = {
     rapidApiKey: string;
+    newsApiKey: string;
+    eventRegistryApiKey: string;
     env: ApplicationEnvironmentEnv;
 };
 

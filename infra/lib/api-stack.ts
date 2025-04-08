@@ -20,7 +20,9 @@ export class TrendGraphApiStack extends cdk.Stack {
         const { applicationEnvironment } = props;
   
         const appConfig = {
-            RAPIDAPI_KEY: applicationEnvironment.rapidApiKey,
+            RAPID_API_KEY: applicationEnvironment.rapidApiKey,
+            NEWS_API_KEY: applicationEnvironment.newsApiKey,
+            EVENT_REGISTRY_API_KEY: applicationEnvironment.eventRegistryApiKey,
         };
         
         const projectRoot = path.join(__dirname, '../../api');
@@ -51,7 +53,7 @@ export class TrendGraphApiStack extends cdk.Stack {
         }));
         
         // Create an S3 bucket to store the industries.json file
-        const userConfigBucket = new s3.Bucket(this, 'UserConfigBucket', {
+        const companyConfigBucket = new s3.Bucket(this, 'CompanyConfigBucket', {
             removalPolicy: cdk.RemovalPolicy.DESTROY,
             autoDeleteObjects: true,
         });
@@ -61,11 +63,12 @@ export class TrendGraphApiStack extends cdk.Stack {
             effect: Effect.ALLOW,
             actions: [
                 's3:GetObject',
-                's3:ListBucket'
+                's3:ListBucket',
+                's3:PutObject'
             ],
             resources: [
-                userConfigBucket.bucketArn,
-                `${userConfigBucket.bucketArn}/*`
+                companyConfigBucket.bucketArn,
+                `${companyConfigBucket.bucketArn}/*`
             ],
         }));
         
@@ -77,11 +80,12 @@ export class TrendGraphApiStack extends cdk.Stack {
             depsLockFilePath: path.join(projectRoot, "package-lock.json"),
             runtime: cdk.aws_lambda.Runtime.NODEJS_22_X,
             role: lambdaRole,
+            timeout: cdk.Duration.seconds(30),
             environment: {
                 NODE_OPTIONS: "--enable-source-maps",
                 NODE_ENV: "production",
                 ...appConfig,
-                DATA_BUCKET: userConfigBucket.bucketName,
+                CONFIG_BUCKET: companyConfigBucket.bucketName,
             },
             bundling: {
                 externalModules: [],
@@ -134,12 +138,61 @@ export class TrendGraphApiStack extends cdk.Stack {
         searchResource.addMethod('POST', new apigateway.LambdaIntegration(lambda, {
             requestTemplates: { 'application/json': '{ "statusCode": 200 }' }
         }));
+      
+        // Create company-config endpoints
+        const companyConfigResource = api.root.addResource('company-config');
         
-        // Add search by registration number endpoint
-        const searchByRegResource = companiesResource.addResource('searchbyreg');
-        searchByRegResource.addMethod('GET', new apigateway.LambdaIntegration(lambda, {
+        // Add save config endpoint
+        companyConfigResource.addMethod('POST', new apigateway.LambdaIntegration(lambda, {
             requestTemplates: { 'application/json': '{ "statusCode": 200 }' }
         }));
+        
+        // Add get config by company endpoint
+        const companyConfigByCompanyResource = companyConfigResource.addResource('{company}');
+        companyConfigByCompanyResource.addMethod('GET', new apigateway.LambdaIntegration(lambda, {
+            requestTemplates: { 'application/json': '{ "statusCode": 200 }' }
+        }));
+
+        // Create configs endpoints
+        const configsResource = api.root.addResource('configs');
+        
+        // Add save config endpoint
+        configsResource.addMethod('POST', new apigateway.LambdaIntegration(lambda, {
+            requestTemplates: { 'application/json': '{ "statusCode": 200 }' }
+        }));
+        
+        // Add hash resource
+        const hashResource = configsResource.addResource('hash');
+        
+        // Add health check endpoint to the hash resource
+        hashResource.addMethod('GET', new apigateway.LambdaIntegration(lambda, {
+            requestTemplates: { 'application/json': '{ "statusCode": 200 }' }
+        }));
+        
+        // Add get configs by email hash endpoint
+        const configsByHashResource = hashResource.addResource('{emailHash}');
+        configsByHashResource.addMethod('GET', new apigateway.LambdaIntegration(lambda, {
+            requestTemplates: { 
+                'application/json': '{ "statusCode": 200, "pathParameters": { "emailHash": "$input.params(\'emailHash\')" } }' 
+            },
+            integrationResponses: [
+                {
+                    statusCode: '200',
+                    responseParameters: {
+                        'method.response.header.Access-Control-Allow-Origin': "'*'"
+                    }
+                }
+            ]
+        }), {
+            methodResponses: [
+                {
+                    statusCode: '200',
+                    responseParameters: {
+                        'method.response.header.Access-Control-Allow-Origin': true
+                    }
+                }
+            ]
+        });
 
         // Output the API URL
         new cdk.CfnOutput(this, 'ApiUrl', {
@@ -154,8 +207,8 @@ export class TrendGraphApiStack extends cdk.Stack {
         });
         
         // Output the S3 bucket name
-        new cdk.CfnOutput(this, 'UserConfigBucketName', {
-            value: userConfigBucket.bucketName,
+        new cdk.CfnOutput(this, 'CompanyConfigBucketName', {
+            value: companyConfigBucket.bucketName,
             description: 'S3 Bucket Name for Config Files',
         });
     }
