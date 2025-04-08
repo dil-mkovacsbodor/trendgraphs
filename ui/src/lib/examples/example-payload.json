@@ -1,0 +1,11 @@
+{
+  "company": "Tesla",
+  "region": "North America",
+  "focus": "Electric Vehicles",
+  "industry": "Automotive",
+  "marketInsight": "Growing demand for sustainable transportation",
+  "dashboardType": "Competitive Analysis",
+  "competitors": ["Ford", "General Motors", "Toyota", "Volkswagen", "Rivian"],
+  "partners": ["Panasonic", "CATL", "LG Energy Solution", "Mobileye"],
+  "timeframe": ["2023-06-01T00:00:00Z", "2023-06-08T00:00:00Z"]
+}

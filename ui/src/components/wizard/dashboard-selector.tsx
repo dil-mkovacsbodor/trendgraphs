@@ -1,4 +1,4 @@
-import type { FormValues } from '@/lib/types/form'
+import type { FormValues } from '@/lib/schema/form.schema'
 import { Building2, Laptop, Leaf, LineChart, Scale, UserCheck, Users, UserSearch } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { UseFormReturn } from 'react-hook-form'

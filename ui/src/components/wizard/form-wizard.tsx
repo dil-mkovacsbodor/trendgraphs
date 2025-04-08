@@ -6,9 +6,21 @@ import EmailSetup from './email-setup'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { Stepper } from '@/components/ui/stepper'
-import type { FormValues } from '@/lib/types/form'
-import { z } from 'zod'
+import type { FormValues, QueryPayload } from '@/lib/schema/form.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { formSchema } from '@/lib/schema/form.schema'
+
+const mockPayload: QueryPayload = {
+  company: 'Tesla',
+  region: 'North America',
+  focus: 'Electric Vehicles',
+  industry: 'Automotive',
+  marketInsight: 'Growing demand for sustainable transportation',
+  dashboardType: 'Competitive Analysis',
+  competitors: ['Ford', 'General Motors', 'Toyota', 'Volkswagen', 'Rivian'],
+  partners: ['Panasonic', 'CATL', 'LG Energy Solution', 'Mobileye'],
+  timeframe: ['2023-06-01T00:00:00Z', '2023-06-08T00:00:00Z'],
+}
 
 const defaultFormData: FormValues = {
   company: '',
@@ -22,29 +34,6 @@ const defaultFormData: FormValues = {
   timeframe: undefined,
 }
 
-const formSchema = z.object({
-  company: z.string().min(1),
-  region: z.string().min(1),
-  focus: z.string().min(1),
-  industry: z.string().min(1),
-  marketInsight: z.string().min(1),
-  dashboardType: z.string().min(1),
-  competitors: z.array(z.string()).min(1),
-  partners: z.array(z.string()).min(1),
-  timeframe: z.object({
-    from: z.date(),
-    to: z.date().optional(),
-  }).optional().refine((data) => {
-    if (data?.to) {
-      return data.to >= data.from
-    }
-    return true
-  }, {
-    message: "End date must be after start date",
-    path: ["to"],
-  }),
-})
-
 export const FormWizard = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const navigate = useNavigate()
@@ -52,10 +41,18 @@ export const FormWizard = () => {
   const form = useForm<FormValues>({
     defaultValues: defaultFormData,
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
   })
 
   function onSubmit(data: FormValues) {
-    console.log('Form data:', data)
+    if (!data.timeframe) return
+
+    const apiPayload: QueryPayload = {
+      ...data,
+      timeframe: [data.timeframe.from.toISOString(), data.timeframe.to.toISOString()],
+    }
+
+    console.log('API Payload:', apiPayload)
     const toastId = toast('Success', {
       description: 'Your configuration has been saved',
       action: {

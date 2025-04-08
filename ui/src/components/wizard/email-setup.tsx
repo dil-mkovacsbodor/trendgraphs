@@ -1,6 +1,6 @@
 import React from 'react'
 import type { UseFormReturn } from 'react-hook-form'
-import type { FormValues } from '@/lib/types/form'
+import type { FormValues } from '@/lib/schema/form.schema'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 

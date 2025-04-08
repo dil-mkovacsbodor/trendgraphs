@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import type { UseFormReturn } from 'react-hook-form'
-import type { FormValues } from '@/lib/types/form'
+import type { FormValues } from '@/lib/schema/form.schema'
 import { TagInput } from './tag-input'
 import { DateRangePicker } from './date-range-picker'
 

@@ -6,7 +6,7 @@ import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
 import type { UseFormReturn } from 'react-hook-form'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import type { FormValues } from '@/lib/types/form'
+import type { FormValues } from '@/lib/schema/form.schema'
 
 interface DateRangePickerProps {
   form: UseFormReturn<FormValues>
@@ -15,6 +15,13 @@ interface DateRangePickerProps {
 }
 
 export function DateRangePicker({ form, name, label }: DateRangePickerProps) {
+  const handleDateSelect = (date: Date | undefined) => {
+    if (!date) return;
+    // Create date in UTC
+    const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    return utcDate;
+  };
+
   return (
     <FormField
       control={form.control}
@@ -35,11 +42,11 @@ export function DateRangePicker({ form, name, label }: DateRangePickerProps) {
                   {field.value?.from ? (
                     field.value.to ? (
                       <>
-                        {format(field.value.from, 'LLL dd, y')} -{' '}
-                        {format(field.value.to, 'LLL dd, y')}
+                        {format(field.value.from, 'dd/MM/yyyy')} -{' '}
+                        {format(field.value.to, 'dd/MM/yyyy')}
                       </>
                     ) : (
-                      format(field.value.from, 'LLL dd, y')
+                      format(field.value.from, 'dd/MM/yyyy')
                     )
                   ) : (
                     <span>Pick a date range</span>
@@ -53,8 +60,17 @@ export function DateRangePicker({ form, name, label }: DateRangePickerProps) {
                 mode="range"
                 defaultMonth={field.value?.from}
                 selected={field.value}
-                onSelect={field.onChange}
+                onSelect={(range) => {
+                  if (range?.from) {
+                    const from = handleDateSelect(range.from);
+                    const to = range.to ? handleDateSelect(range.to) : undefined;
+                    field.onChange({ from, to });
+                  } else {
+                    field.onChange(undefined);
+                  }
+                }}
                 numberOfMonths={2}
+                disabled={(date) => date > new Date()}
               />
             </PopoverContent>
           </Popover>
