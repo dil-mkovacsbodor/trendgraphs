@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Building2, Laptop, Leaf, LineChart, Scale, Users } from 'lucide-react';
-import { NewsObject } from '@/lib/types/pestle';
+import type { NewsObject } from '@/lib/types/pestle';
 
 interface PestleChartProps {
   data: {
@@ -40,7 +40,7 @@ export function PestleChart({ data }: PestleChartProps) {
   }));
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 gap-6">
       {/* Overview Card */}
       <Card>
         <CardHeader>

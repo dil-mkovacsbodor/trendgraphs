@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertTriangle, BarChart2, TrendingUp } from 'lucide-react';
-import { RiskData } from '@/lib/types/risk';
+import type { RiskData } from '@/lib/types/risk';
 
 interface RiskProbabilityProps {
   data: RiskData;
