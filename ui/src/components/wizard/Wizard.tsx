@@ -84,8 +84,8 @@ const Wizard: React.FC = () => {
   return (
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="wizard-container bg-card border border-[oklch(0.9_0_0)]">
-            <div className="wizard-progress border-b-2 border-[oklch(0.9_0_0)] pb-8">
+          <div className="wizard-container bg-card border border-[oklch(0.9_0_0)] px-8">
+            <div className="wizard-progress border-b-2 border-[oklch(0.9_0_0)] pb-8 mx-auto">
               {steps.map((step, index) => (
                   <div
                       key={index}

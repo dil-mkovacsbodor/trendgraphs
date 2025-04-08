@@ -36,13 +36,15 @@
 }
 
 .progress-step.active .step-number {
-  background: #007bff;
+  background: oklch(0.723 0.219 149.579);
   color: white;
 }
 
 .progress-step.completed .step-number {
-  background: #28a745;
-  color: white;
+  background: oklch(0.92 0.07 149.579);
+  color: oklch(0.4 0.12 149.579);
+  color: ghostwhite;
+
 }
 
 .step-title {
@@ -51,7 +53,12 @@
 }
 
 .progress-step.active .step-title {
-  color: #007bff;
+  color: oklch(0.723 0.219 149.579);
+  font-weight: bold;
+}
+
+.progress-step.completed .step-title {
+  color: oklch(0.92 0.07 149.579);
   font-weight: bold;
 }
 

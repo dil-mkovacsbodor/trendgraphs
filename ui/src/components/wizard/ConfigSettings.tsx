@@ -13,7 +13,7 @@ interface ConfigSettingsProps {
 
 export function ConfigSettings({ form, onNext }: ConfigSettingsProps) {
     return (
-        <div className="w-full grid grid-cols-2 gap-12 px-6">
+        <div className="w-full grid grid-cols-2 gap-12 px-12">
             {/* LEFT COLUMN FIELDS */}
             <div className="space-y-6 gap-2 flex flex-col">
                 <FormField
