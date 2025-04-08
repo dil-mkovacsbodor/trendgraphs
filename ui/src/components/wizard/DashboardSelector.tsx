@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormData} from "@/components/wizard/Wizard.tsx";
-import {Building2, Laptop, Leaf, LineChart, Scale, UserCheck, Users,} from "lucide-react";
+import {Building2, Laptop, Leaf, LineChart, Scale, UserCheck, Users, UserSearch} from "lucide-react";
 import {useForm} from "react-hook-form";
 
 interface DashboardSelectorProps {
@@ -14,7 +14,6 @@ const DashboardSelector: React.FC<DashboardSelectorProps> = ({ form, onNext, onB
 
     const handleCardClick = (dashboardType: string) => {
         form.setValue("dashboardType", dashboardType);
-        console.log(form.getValues("dashboardType"));
     };
 
     const pestleCategories = [
@@ -53,7 +52,7 @@ const DashboardSelector: React.FC<DashboardSelectorProps> = ({ form, onNext, onB
     const riskCategories = [
         {
             name: "Competitors",
-            icon: Users,
+            icon: UserSearch,
             bgColor: "bg-orange-100"
         },
         {
@@ -90,7 +89,7 @@ const DashboardSelector: React.FC<DashboardSelectorProps> = ({ form, onNext, onB
                             key={category.name}
                         >
                             <div className="flex flex-col items-center">
-                                <div className={`w-24 h-24 rounded-lg ${category.bgColor} flex items-center justify-center`}>
+                                <div className={`w-24 h-24 rounded-lg ${category.bgColor} flex items-center justify-center m-2`}>
                                     <category.icon size={40} className="text-gray-700" />
                                 </div>
                                 <span className="font-bold text-gray-700">{category.name}</span>
@@ -110,7 +109,7 @@ const DashboardSelector: React.FC<DashboardSelectorProps> = ({ form, onNext, onB
                                 key={category.name}
                             >
                                 <div className="flex flex-col items-center">
-                                    <div className={`w-24 h-24 rounded-lg ${category.bgColor} flex items-center justify-center mb-2`}>
+                                    <div className={`w-24 h-24 rounded-lg ${category.bgColor} flex items-center justify-center m-2`}>
                                         <category.icon size={40} className="text-gray-700" />
                                     </div>
                                     <span className="font-bold text-gray-700">{category.name}</span>
