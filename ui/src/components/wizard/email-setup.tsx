@@ -23,9 +23,8 @@ const EmailSetup: React.FC<EmailSetupProps> = ({ form, onBack, onFinish }) => {
           </p>
         </CardContent>
       </Card>
-      <p className="mb-4 text-sm text-muted-foreground py-6">You'll receive your dashboard when it's ready</p>
       <div className="px-12 py-6">
-        <Button className="w-full text-lg" onClick={onFinish}>
+        <Button className="w-full text-lg mt-4" onClick={onFinish}>
           Subscribe
         </Button>
       </div>
