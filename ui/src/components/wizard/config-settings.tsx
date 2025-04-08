@@ -12,114 +12,132 @@ interface ConfigSettingsProps {
 }
 
 export function ConfigSettings({ form, onNext }: ConfigSettingsProps) {
+  const handleNext = () => {
+    form.trigger(['company', 'region', 'focus', 'industry', 'marketInsight']).then(isValid => {
+      if (isValid) {
+        onNext()
+      }
+    })
+  }
+
   return (
-    <div className="w-full grid grid-cols-2 gap-12 px-12">
-      {/* LEFT COLUMN FIELDS */}
-      <div className="space-y-6 gap-2 flex flex-col">
-        <FormField
-          control={form.control}
-          name="company"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="pb-3 text-1xl font-semibold">Company:</FormLabel>
-              <Input type="text" placeholder="Type your company name..." {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="region"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="pb-3 text-1xl font-semibold">Region:</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+    <div className="w-full max-w-4xl mx-auto px-6 py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* LEFT COLUMN FIELDS */}
+        <div className="space-y-6">
+          <FormField
+            control={form.control}
+            name="company"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm font-medium text-gray-700">Company</FormLabel>
                 <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select region" />
-                  </SelectTrigger>
+                  <Input type="text" placeholder="Enter your company name" {...field} className="mt-1" />
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="north_america">North America</SelectItem>
-                  <SelectItem value="europe">Europe</SelectItem>
-                  <SelectItem value="asia">Asia</SelectItem>
-                  <SelectItem value="africa">Africa</SelectItem>
-                  <SelectItem value="latin_america">Latin America</SelectItem>
-                  <SelectItem value="middle_east">Middle East</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="focus"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="pb-3 text-1xl font-semibold">Main focus/category:</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="region"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm font-medium text-gray-700">Region</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="mt-1 w-full">
+                      <SelectValue placeholder="Select region" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="north_america">North America</SelectItem>
+                    <SelectItem value="europe">Europe</SelectItem>
+                    <SelectItem value="asia">Asia</SelectItem>
+                    <SelectItem value="africa">Africa</SelectItem>
+                    <SelectItem value="latin_america">Latin America</SelectItem>
+                    <SelectItem value="middle_east">Middle East</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="focus"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm font-medium text-gray-700">Main Focus/Category</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="mt-1 w-full">
+                      <SelectValue placeholder="Select focus/category" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="product_development">Product Development</SelectItem>
+                    <SelectItem value="sales_and_marketing">Sales & Marketing</SelectItem>
+                    <SelectItem value="research_and_innovation">Research & Innovation</SelectItem>
+                    <SelectItem value="customer_support">Customer Support</SelectItem>
+                    <SelectItem value="operations_and_logistics">Operations & Logistics</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="industry"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm font-medium text-gray-700">Industry</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="mt-1 w-full">
+                      <SelectValue placeholder="Select industry" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="technology">Technology</SelectItem>
+                    <SelectItem value="healthcare">Healthcare</SelectItem>
+                    <SelectItem value="finance">Finance</SelectItem>
+                    <SelectItem value="manufacturing">Manufacturing</SelectItem>
+                    <SelectItem value="retail">Retail</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        {/* RIGHT COLUMN - Market Insight */}
+        <div className="space-y-6">
+          <FormField
+            control={form.control}
+            name="marketInsight"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm font-medium text-gray-700">Market Insight Objective</FormLabel>
                 <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select focus/category" />
-                  </SelectTrigger>
+                  <Textarea
+                    placeholder="Describe your market insight objective..."
+                    {...field}
+                    className="mt-1 min-h-[200px]"
+                  />
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="product_development">Product Development</SelectItem>
-                  <SelectItem value="sales_and_marketing">Sales & Marketing</SelectItem>
-                  <SelectItem value="research_and_innovation">Research & Innovation</SelectItem>
-                  <SelectItem value="customer_support">Customer Support</SelectItem>
-                  <SelectItem value="operations_and_logistics">Operations & Logistics</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="industry"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="pb-3 text-1xl font-bold">Industry:</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select industry" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="technology">Technology</SelectItem>
-                  <SelectItem value="healthcare">Healthcare</SelectItem>
-                  <SelectItem value="finance">Finance</SelectItem>
-                  <SelectItem value="manufacturing">Manufacturing</SelectItem>
-                  <SelectItem value="retail">Retail</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
       </div>
 
-      {/* RIGHT COLUMN - Market Insight */}
-      <div className="space-y-6">
-        <FormField
-          control={form.control}
-          name="marketInsight"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="pb-3 text-1xl font-bold">Market Insight Objective:</FormLabel>
-              <Textarea placeholder="Type your market insight objective here..." {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
-      {/* FULL WIDTH SUBMIT BUTTON */}
-      <div className="flex col-start-2 justify-end">
-        <Button type="button" onClick={onNext}>
+      {/* SUBMIT BUTTON */}
+      <div className="mt-8 flex justify-end">
+        <Button type="button" onClick={handleNext} className="px-6 py-2">
           Next
         </Button>
       </div>

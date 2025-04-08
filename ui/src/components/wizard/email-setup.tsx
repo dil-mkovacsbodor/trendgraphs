@@ -1,13 +1,13 @@
-import React from 'react';
-import {UseFormReturn} from "react-hook-form";
-import {FormValues} from "@/components/wizard/form-wizard";
-import {Card, CardContent} from "@/components/ui/card.tsx";
-import {Button} from "@/components/ui/button.tsx";
+import React from 'react'
+import type { UseFormReturn } from 'react-hook-form'
+import type { FormValues } from '@/lib/types/form'
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 interface EmailSetupProps {
-  form: UseFormReturn<FormValues>;
-  onBack: () => void;
-  onFinish: () => void;
+  form: UseFormReturn<FormValues>
+  onBack: () => void
+  onFinish: () => void
 }
 
 const EmailSetup: React.FC<EmailSetupProps> = ({ form, onBack, onFinish }) => {
@@ -23,16 +23,14 @@ const EmailSetup: React.FC<EmailSetupProps> = ({ form, onBack, onFinish }) => {
           </p>
         </CardContent>
       </Card>
-      <p className="mb-4 text-sm text-muted-foreground py-6">
-        You'll receive your dashboard when it's ready
-      </p>
+      <p className="mb-4 text-sm text-muted-foreground py-6">You'll receive your dashboard when it's ready</p>
       <div className="px-12 py-6">
-      <Button className="w-full text-lg" onClick={onFinish}>Subscribe</Button>
+        <Button className="w-full text-lg" onClick={onFinish}>
+          Subscribe
+        </Button>
       </div>
     </div>
+  )
+}
 
-
-  );
-};
-
-export default EmailSetup;
+export default EmailSetup

@@ -12,7 +12,14 @@ interface DashboardSelectorProps {
 export const DashboardSelector = ({ form, onNext, onBack }: DashboardSelectorProps) => {
   const handleCardClick = (dashboardType: string) => {
     form.setValue('dashboardType', dashboardType)
-    onNext()
+  }
+
+  const handleNext = () => {
+    form.trigger(['dashboardType']).then(isValid => {
+      if (isValid) {
+        onNext()
+      }
+    })
   }
 
   const pestleCategories = [
@@ -125,7 +132,7 @@ export const DashboardSelector = ({ form, onNext, onBack }: DashboardSelectorPro
           Back
         </Button>
 
-        <Button type="button" onClick={onNext}>
+        <Button type="button" onClick={handleNext}>
           Next
         </Button>
       </div>

@@ -7,6 +7,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { Stepper } from '@/components/ui/stepper'
 import type { FormValues } from '@/lib/types/form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const defaultFormData: FormValues = {
   company: '',
@@ -20,12 +22,25 @@ const defaultFormData: FormValues = {
   timeframe: [],
 }
 
+const formSchema = z.object({
+  company: z.string().min(1),
+  region: z.string().min(1),
+  focus: z.string().min(1),
+  industry: z.string().min(1),
+  marketInsight: z.string().min(1),
+  dashboardType: z.string().min(1),
+  competitors: z.array(z.string()).min(1),
+  partners: z.array(z.string()).min(1),
+  timeframe: z.array(z.string()).min(1),
+})
+
 export const FormWizard = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const navigate = useNavigate()
 
   const form = useForm<FormValues>({
     defaultValues: defaultFormData,
+    resolver: zodResolver(formSchema),
   })
 
   function onSubmit(data: FormValues) {
