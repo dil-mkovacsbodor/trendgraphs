@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import ConfigSettings from './ConfigSettings';
 import DashboardSelector from './DashboardSelector';
 import DashboardName from './DashboardName';
@@ -47,8 +47,8 @@ const Wizard: React.FC = () => {
   ];
 
   return (
-    <div className="wizard-container">
-      <div className="wizard-progress">
+    <div className="wizard-container bg-card border border-[oklch(0.9_0_0)]">
+      <div className="wizard-progress border-b-2 border-[oklch(0.9_0_0)] pb-8">
         {steps.map((step, index) => (
           <div 
             key={index} 

@@ -43,7 +43,7 @@ export function ConfigSettings() {
   return (
       <div className="flex justify-center">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full grid grid-cols-2 gap-12 p-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full grid grid-cols-2 gap-12 px-6">
             {/* LEFT COLUMN FIELDS */}
             <div className="space-y-6 gap-2 flex flex-col">
               <FormField
@@ -51,7 +51,7 @@ export function ConfigSettings() {
                   name="company"
                   render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="pb-3 text-1xl">Company:</FormLabel>
+                        <FormLabel className="pb-3 text-1xl font-semibold">Company:</FormLabel>
                         <Input
                             type="text"
                             placeholder="Type your company name..."
@@ -67,7 +67,7 @@ export function ConfigSettings() {
                   name="region"
                   render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="pb-3 text-1xl">Region:</FormLabel>
+                        <FormLabel className="pb-3 text-1xl font-semibold">Region:</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value} >
                           <FormControl>
                             <SelectTrigger className="w-full">
@@ -92,7 +92,7 @@ export function ConfigSettings() {
                   name="focus"
                   render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="pb-3 text-1xl">Main focus/category:</FormLabel>
+                        <FormLabel className="pb-3 text-1xl font-semibold">Main focus/category:</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="w-full">
@@ -116,7 +116,7 @@ export function ConfigSettings() {
                   name="industry"
                   render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="pb-3 text-1xl">Industry:</FormLabel>
+                        <FormLabel className="pb-3 text-1xl font-bold">Industry:</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="w-full">
@@ -144,7 +144,7 @@ export function ConfigSettings() {
                   name="marketInsight"
                   render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="pb-3 text-1xl">Market Insight Objective:</FormLabel>
+                        <FormLabel className="pb-3 text-1xl font-bold">Market Insight Objective:</FormLabel>
                         <Textarea
                             placeholder="Type your market insight objective here..."
                             onChange={field.onChange}

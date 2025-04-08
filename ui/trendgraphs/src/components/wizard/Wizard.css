@@ -2,7 +2,6 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -10,22 +9,12 @@
 .wizard-progress {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
   position: relative;
-}
-
-.wizard-progress::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #e0e0e0;
-  z-index: 1;
+  width: 100%;
 }
 
 .progress-step {
+  width: 100%;
   position: relative;
   z-index: 2;
   background: white;
@@ -151,4 +140,4 @@
 .next-button:hover,
 .finish-button:hover {
   background-color: #0056b3;
-} 
+}
