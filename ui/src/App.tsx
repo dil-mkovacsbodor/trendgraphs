@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
-import Wizard from './components/wizard/Wizard'
+import { Wizard } from './components/wizard/Wizard'
 import { Toaster } from 'sonner'
 import { ResultsPage } from './pages/results-page'
 
