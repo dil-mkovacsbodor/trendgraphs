@@ -1,6 +1,6 @@
 import React from 'react';
 import {UseFormReturn} from "react-hook-form";
-import {FormValues} from "@/components/wizard/Wizard.tsx";
+import {FormValues} from "@/components/wizard/form-wizard";
 import {Card, CardContent} from "@/components/ui/card.tsx";
 import {Button} from "@/components/ui/button.tsx";
 

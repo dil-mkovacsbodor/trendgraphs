@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import ConfigSettings from './ConfigSettings'
-import { DashboardSelector } from './DashboardSelector'
-import EmailSetup from './EmailSetup'
+import ConfigSettings from './config-settings'
+import { DashboardSelector } from './dashboard-selector'
+import EmailSetup from './email-setup'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { Stepper } from '@/components/ui/stepper'
@@ -20,7 +20,7 @@ const defaultFormData: FormValues = {
   timeframe: [],
 }
 
-export const Wizard = () => {
+export const FormWizard = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const navigate = useNavigate()
 
