@@ -13,6 +13,10 @@ export interface FormData {
   focus: string
   industry: string
   marketInsight: string
+  dashboardType: string
+  competitors: string[],
+  partners: string[],
+  timeframe: string[]  //(UTC, tol/ig)
 }
 
 const defaultFormData: FormData = {
@@ -21,6 +25,9 @@ const defaultFormData: FormData = {
   focus: "",
   industry: "",
   marketInsight: "",
+  dashboardType: "",
+  competitors: [],
+  partners: [],
 }
 
 const Wizard: React.FC = () => {
@@ -57,16 +64,18 @@ const Wizard: React.FC = () => {
     },
     {
       title: 'Dashboard Selection',
-      component: <DashboardSelector 
-        onNext={() => navigate('/dashboard-name')} 
-        onBack={() => setCurrentStep(0)} 
+      component: <DashboardSelector
+          form={form}
+          onNext={() => navigate('/dashboard-name')}
+          onBack={() => setCurrentStep(0)}
       />
     },
     {
       title: 'Email Setup',
-      component: <EmailSetup 
-        onBack={() => setCurrentStep(2)} 
-        onFinish={() => console.log('Wizard completed')} 
+      component: <EmailSetup
+          form={form}
+          onBack={() => setCurrentStep(2)}
+          onFinish={() => console.log('Wizard completed')}
       />
     }
   ];

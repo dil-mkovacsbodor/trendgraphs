@@ -1,6 +1,9 @@
 import React from 'react';
+import {UseFormReturn} from "react-hook-form";
+import {FormData} from "@/components/wizard/Wizard.tsx";
 
 interface EmailSetupProps {
+  form: UseFormReturn<FormData>;
   onBack: () => void;
   onFinish: () => void;
 }
