@@ -5,7 +5,9 @@ import * as cdk from 'aws-cdk-lib';
 const app = new cdk.App();
 
 const applicationEnvironment: ApplicationEnvironment = {
-    rapidApiKey: "rapidApiKey",
+    rapidApiKey: "test",
+    eventRegistryApiKey: "test",
+    newsApiKey: "test",
     env: {
         account: AwsAccount.HackFest,
         region: Region.UsWest2
