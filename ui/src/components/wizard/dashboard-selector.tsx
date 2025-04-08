@@ -2,6 +2,7 @@ import type { FormValues } from '@/lib/schema/form.schema'
 import { Building2, Laptop, Leaf, LineChart, Scale, UserCheck, Users, UserSearch } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { UseFormReturn } from 'react-hook-form'
+import { useWatch } from 'react-hook-form'
 
 interface DashboardSelectorProps {
   form: UseFormReturn<FormValues>
@@ -10,6 +11,11 @@ interface DashboardSelectorProps {
 }
 
 export const DashboardSelector = ({ form, onNext, onBack }: DashboardSelectorProps) => {
+  const selectedDashboardType = useWatch({
+    control: form.control,
+    name: 'dashboardType',
+  })
+
   const handleCardClick = (dashboardType: string) => {
     form.setValue('dashboardType', dashboardType)
   }
@@ -88,7 +94,11 @@ export const DashboardSelector = ({ form, onNext, onBack }: DashboardSelectorPro
           <h2 className="text-lg mb-4 text-center tracking-wide font-semibold">PESTLE</h2>
 
           <div
-            className="h-full border rounded-lg p-6 shadow-sm bg-white cursor-pointer hover:ring-1 hover:ring-ring hover:bg-green-50 hover:border-transparent transition-all duration-200"
+            className={`h-full border rounded-lg p-6 shadow-sm bg-white cursor-pointer transition-all duration-200 ${
+              selectedDashboardType === 'pestle'
+                ? 'ring-2 ring-primary bg-green-50 border-transparent'
+                : 'hover:ring-1 hover:ring-ring hover:bg-green-50 hover:border-transparent'
+            }`}
             onClick={() => handleCardClick('pestle')}
           >
             <div className="grid grid-cols-2 gap-6">
@@ -109,7 +119,11 @@ export const DashboardSelector = ({ form, onNext, onBack }: DashboardSelectorPro
         <div className="flex-1 h-full">
           <h2 className="text-lg mb-4 text-center tracking-wide font-semibold">Risk Probability</h2>
           <div
-            className="h-full border rounded-lg p-6 shadow-sm bg-white cursor-pointer hover:ring-1 hover:ring-ring hover:bg-green-50 hover:border-transparent transition-all duration-200"
+            className={`h-full border rounded-lg p-6 shadow-sm bg-white cursor-pointer transition-all duration-200 ${
+              selectedDashboardType === 'riskProbability'
+                ? 'ring-2 ring-primary bg-green-50 border-transparent'
+                : 'hover:ring-1 hover:ring-ring hover:bg-green-50 hover:border-transparent'
+            }`}
             onClick={() => handleCardClick('riskProbability')}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
